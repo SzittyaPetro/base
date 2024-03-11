@@ -2,8 +2,6 @@ package hu.bme.mit.train.interfaces;
 
 public interface TrainController {
 
-	Table<Date, Integer, Integer> tachograph= HashBasedTable.create();
-
 	void followSpeed();
 
 	int getReferenceSpeed();
