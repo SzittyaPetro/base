@@ -49,6 +49,14 @@ public class TrainSystemTest {
 		controller.followSpeed();
 		Assert.assertEquals(0, controller.getReferenceSpeed());
 	}
+	@Test
+	public void OverridingJoystickPositionToPosotive_SetsAlarmFlag(){
+		user.overrideJoystickPosition(-4);
+		controller.followSpeed();
+		controller.setEmergencyBrake(true);
+		Assert.assertEquals(0, controller.getReferenceSpeed());
+	}
+
 
 	
 }
