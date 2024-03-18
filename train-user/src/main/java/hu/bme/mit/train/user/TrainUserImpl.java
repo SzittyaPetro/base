@@ -7,12 +7,12 @@ public class TrainUserImpl implements TrainUser {
 
 	private TrainController controller;
 	private int joystickPosition;
-
+	private int speedLimit;
+	private boolean alarmState;
 	public TrainUserImpl(TrainController controller) {
 		this.controller = controller;
 	}
 
-	@Override
 	public boolean getAlarmFlag() {
 		return false;
 	}
@@ -21,6 +21,13 @@ public class TrainUserImpl implements TrainUser {
 	public int getJoystickPosition() {
 		return joystickPosition;
 	}
+	@Override
+	public void overrideSpeedLimit(int speedLimit) {
+		this.speedLimit = speedLimit;
+		checkAlarm();
+		this.controller.setSpeedLimit(speedLimit);
+	}
+
 
 	@Override
 	public void overrideJoystickPosition(int joystickPosition) {

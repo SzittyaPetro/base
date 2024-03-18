@@ -6,7 +6,7 @@ public interface TrainUser {
 
 	boolean getAlarmState();
 	void SetAlarmState(boolean getAlarmState);
-
+	public void overrideSpeedLimit(int speedLimit);
 	void overrideJoystickPosition(int joystickPosition);
 
 }

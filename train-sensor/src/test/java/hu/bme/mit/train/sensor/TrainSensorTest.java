@@ -14,7 +14,7 @@ public class TrainSensorTest {
     public void before() {
         mockTrainController = mock(TrainController.class);
         mockTrainUser = mock(TrainUser.class);
-        TrainSensor = new TrainSensorImpl(mockTrainController, mockTrainUser);
+        trainSensor = new TrainSensorImpl(mockTrainController, mockTrainUser);
     }
 
     @Test
@@ -26,39 +26,39 @@ public class TrainSensorTest {
 
     private TrainUser mockTrainUser;
     
-    private TrainSensorImpl TrainSensor;
+    private TrainSensorImpl trainSensor;
 
     @Test
     public void testAbsolute()
     {
-        when (mockTrainController.getReferenceSpeed()).thenReturn(100);
-        TrainSensor.overrideSpeedLimit(600);
-        verify(true, TrainSensor.getAlarmState());
+        when (mockTrainController.getReferenceSpeed()).thenReturn(400);
+        trainSensor.overrideSpeedLimit(600);
+        verify(mockTrainUser,times(1)).SetAlarmState(true);
     }
 
     @Test
     public void testRelative()
     {
         when (mockTrainController.getReferenceSpeed()).thenReturn(100);
-        TrainSensor.overrideSpeedLimit(40);
-        verify(true, TrainSensor.getAlarmState());
+        trainSensor.overrideSpeedLimit(40);
+        verify(mockTrainUser,times(1)).SetAlarmState(true);
     }
 
     @Test
     public void testAlarmTriggered()
     {
         when (mockTrainController.getReferenceSpeed()).thenReturn(100);
-        TrainSensor.overrideSpeedLimit(60);
-        verify(false,TrainSensor.getAlarmState());
+        trainSensor.overrideSpeedLimit(60);
+        verify(mockTrainUser,times(1)).SetAlarmState(false);
     }
 
     @Test
     public void testAlarmReset()
     {
         when (mockTrainController.getReferenceSpeed()).thenReturn(100);
-        TrainSensor.overrideSpeedLimit(40);
-        verify(false,TrainSensor.getAlarmState());
-        TrainSensor.overrideSpeedLimit(60);
-        verify(false,TrainSensor.getAlarmState());
+        trainSensor.overrideSpeedLimit(40);
+        verify(mockTrainUser,times(1)).SetAlarmState(true);
+        trainSensor.overrideSpeedLimit(60);
+        verify(mockTrainUser,times(1)).SetAlarmState(false);
     }
 }

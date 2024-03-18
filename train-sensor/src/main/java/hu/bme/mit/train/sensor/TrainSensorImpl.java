@@ -32,7 +32,7 @@ public class TrainSensorImpl implements TrainSensor {
 	@Override
 	public void SetAlarmState(boolean alarmState)
 	{
-		this.alarmState = alarmState;
+		this.user.SetAlarmState(alarmState);
 	}
 
 	@Override
