@@ -9,6 +9,7 @@ public class TrainControllerImpl implements TrainController {
 	private int step = 0;
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
+
 	private Thread trainThickThread;
 	@Override
 	public void followSpeed() {
@@ -76,5 +77,5 @@ public class TrainControllerImpl implements TrainController {
 	}
 	@Override
 	public void setEmergencyBrake(boolean EmergencyBrake){referenceSpeed=0;}
-	
+
 }
