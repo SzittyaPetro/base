@@ -28,4 +28,32 @@ public class TrainUserImpl implements TrainUser {
 		controller.setJoystickPosition(joystickPosition);
 	}
 
+
+	@Override
+	public void SetAlarmState(boolean alarmState)
+	{
+		this.alarmState = alarmState;
+	}
+
+	@Override
+	public boolean getAlarmState()
+	{
+		return alarmState;
+	}
+
+	private void checkAlarm()
+	{
+		if (speedLimit < 0 || speedLimit > 500)
+		{
+			SetAlarmState(true);
+		}
+		else if (speedLimit < controller.getReferenceSpeed() * 0.5)
+		{
+			SetAlarmState(true);
+		}
+		else
+		{
+			SetAlarmState(false);
+		}
+	}
 }
