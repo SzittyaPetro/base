@@ -78,4 +78,9 @@ public class TrainControllerImpl implements TrainController {
 	@Override
 	public void setEmergencyBrake(boolean EmergencyBrake){referenceSpeed=0;}
 
+	@Override
+	public void storeTachograph(){
+		tachograph.put(new Date(),this.step,referenceSpeed);
+	}
+
 }
