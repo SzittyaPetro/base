@@ -76,7 +76,5 @@ public class TrainControllerImpl implements TrainController {
 	}
 	@Override
 	public void setEmergencyBrake(boolean EmergencyBrake){referenceSpeed=0;}
-
-
-
+	
 }
