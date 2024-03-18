@@ -12,4 +12,8 @@ public interface TrainController {
 
 	public void setEmergencyBrake(boolean EmergencyBrake);
 
+	public void startTrainTickThread(int ThickInterval);
+
+	public void stopTrainTickThread();
+
 }

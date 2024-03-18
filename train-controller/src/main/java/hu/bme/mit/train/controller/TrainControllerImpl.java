@@ -9,7 +9,7 @@ public class TrainControllerImpl implements TrainController {
 	private int step = 0;
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
-
+	private Thread trainThickThread;
 	@Override
 	public void followSpeed() {
 		if (referenceSpeed < 0) {
@@ -23,6 +23,33 @@ public class TrainControllerImpl implements TrainController {
 		}
 
 		enforceSpeedLimit();
+	}
+	@Override
+	public void startTrainTickThread(int ThickInterval) throws
+	IllegalArgumentException{
+		if (trainThickThread != null){
+			throw new IllegalArgumentException("Thread exists already");
+		}
+		this.trainThickThread= new Thread(()->{
+			while (true){
+				synchronized(this){
+					followSpeed();
+				}
+				try{
+					Thread.sleep(ThickInterval);
+				}catch(InterruptedException e){
+					System.out.println("Thread interrupted");
+				}
+			}
+		});
+	}
+	@Override
+	public void stopTrainTickThread(){
+		if(trainThickThread!=null){
+			trainThickThread.interrupt();
+			trainThickThread=null;
+			System.out.println("Thread stopped");
+		}
 	}
 
 	@Override
@@ -49,6 +76,7 @@ public class TrainControllerImpl implements TrainController {
 	}
 	@Override
 	public void setEmergencyBrake(boolean EmergencyBrake){referenceSpeed=0;}
+
 
 
 }
