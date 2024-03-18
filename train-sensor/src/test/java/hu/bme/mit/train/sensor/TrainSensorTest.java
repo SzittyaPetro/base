@@ -64,6 +64,6 @@ public class TrainSensorTest {
         TrainSensor.overrideSpeedLimit(40);
         AssertFalse(TrainSensor.getAlarmState());
         TrainSensor.overrideSpeedLimit(60);
-        assertFail(TrainSensor.getAlarmState();)
+        assertFail(TrainSensor.getAlarmState());
     }
 }
